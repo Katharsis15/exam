@@ -39,9 +39,9 @@ if (isset($_POST['password'])) {
 $status = htmlspecialchars(addslashes($_POST['status']));
 
 if(!empty($login)) {
-    $result = mysqli_query($db, "SELECT * FROM users WHERE login = '$login' AND status = '$status'");
+    $result = mysqli_query($db, "SELECT * FROM `users` WHERE `login` = '$login' AND `status` = '$status'");
 
-    if (mysqli_num_rows($result) == 0) { // если пользователь не найден, то создаем пользователя
+    if (mysqli_num_rows($result== 0)) {
         $sql = mysqli_query($db, "INSERT INTO `users` (`name`, `surname`, `phone`, `login`, `password`, `status`) VALUES('$name', '$surname', '$phone', '$login', '$password', '$status')");
         //die("INSERT INTO `users` (`name`, `surname`, `phone`, `login`, `password`, `status`) VALUES('$name', '$surname', '$phone', '$login', '$password', '$status')");
         if(mysqli_error($db) === "") {
@@ -56,7 +56,6 @@ if(!empty($login)) {
 }
 
     //header('Location: index.php');
-//avatar
 /*
 $sel = mysqli_query($db, "SELECT * FROM `users` WHERE `login` = '$login' AND `status` = '$status'");
 $num = mysqli_num_rows($sel);

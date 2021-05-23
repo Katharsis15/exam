@@ -1,9 +1,12 @@
-<?php session_start(); ?>
+<?php
+session_start();
+require 'database.php';
+?>
 <!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Регистрация</title>
+    <title>Регистрация и авторизация</title>
     <style>
 div {
     float: left;
@@ -18,7 +21,6 @@ h2 {
 
 <?php
 if (!isset($_SESSION['login'])) {
-//if($_COOKIE['user'] == ''):
 ?>
 <div>
 <h2>Регистрация</h2>
@@ -78,8 +80,17 @@ if (!isset($_SESSION['login'])) {
 
 <?php } else { ?>
     <h1>Добро пожаловать, <?= $_SESSION['login']; ?></h1>
-    <h2>Для загрузки аватара нажмите <a href="avatar.php">сюда</a></h2>
+    <h2>Для загрузки аватара нажмите <a href="photo.php">сюда</a></h2>
     <h2>Для выхода нажмите <a href="exit.php">сюда</a></h2>
 <?php } ?>
+
+<div class="gallery">
+
+    <ul>
+        <li>
+
+        </li>
+    </ul>
+</div>
 </body>
 </html>
