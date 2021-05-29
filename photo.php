@@ -19,7 +19,7 @@ require 'database.php';
 <body>
 <form action="load_photo.php" method="post" enctype="multipart/form-data">
     <p>
-        <label for="file">Загрузите Ваш аватар (допустимые расширения: ".jpg", ".jpeg", ".png", ".gif"; максимальный размер файла )<br></label>
+        <label for="file">Загрузите Ваш аватар (допустимое расширение ".jpg"; максимальный размер файла 1 Гб). Пожалуйста, проверьте, что Ваш файл назван по-английски.<br></label>
         <input name="uploadfile" type="file" id="file">
     </p>
     <p>
