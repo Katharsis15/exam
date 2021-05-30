@@ -5,7 +5,7 @@ require 'database.php';
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Загрузка аватара</title>
+    <title>Загрузка фото</title>
     <style>
         div {
             float: left;
@@ -19,7 +19,7 @@ require 'database.php';
 <body>
 <form action="load_photo.php" method="post" enctype="multipart/form-data">
     <p>
-        <label for="file">Загрузите Ваш аватар (допустимое расширение ".jpg"; максимальный размер файла 1 Гб). Пожалуйста, проверьте, что Ваш файл назван по-английски.<br></label>
+        <label for="file">Загрузите фотографию (допустимое расширение ".jpg"; максимальный размер файла 1 Гб). Пожалуйста, проверьте, что Ваш файл назван по-английски.<br></label>
         <input name="uploadfile" type="file" id="file">
     </p>
     <p>
