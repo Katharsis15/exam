@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 require 'database.php';
 ?>
 <!doctype html>
@@ -46,12 +46,20 @@ if (!isset($_SESSION['login'])) {
             <input name="password" type="password" id="password-reg">
         </p>
         <p>
-            <label for="status-reg">Ваш статус:<br></label>
-            <select size="1" name="status" id="status-reg">
-                <option disabled>Выберите Ваш статус</option>
+            Выберите Ваш статус:<br>
+            <input name="status" checked type="radio" value="master" id="status-reg-master">
+            <label for="status-reg-master">Мастер</label>
+
+            <input name="status" type="radio" value="client" id="status-reg-client">
+            <label for="status-reg-client">Клиент</label>
+            <!--
+            <select name="status" size="1" id="status-reg">
+               <option disabled>Выберите Ваш статус</option>
                 <option value="client">Клиент</option>
-                <option selected value="master">Мастер</option>
-            </select></p>
+                <option value="master">Мастер</option>
+            </select>-->
+
+            </p>
         <p><input type="submit" name="submit" value="Зарегистрироваться">
         </p></form>
 </div>
@@ -68,29 +76,27 @@ if (!isset($_SESSION['login'])) {
                 <input name="password" type="password" id="password-auth">
             </p>
             <p>
-                <label for="status-auth">Ваш статус:<br></label>
+                <!--
                 <select size="1" name="status" id="status-auth">
                     <option disabled>Выберите Ваш статус</option>
                     <option value="client">Клиент</option>
                     <option selected value="master">Мастер</option>
-                </select></p>
+                </select>-->
+                Выберите Ваш статус:<br>
+                <input name="status" checked type="radio" value="master" id="status-auth-master">
+                <label for="status-auth-master">Мастер</label>
+
+                <input name="status" type="radio" value="client" id="status-auth-client">
+                <label for="status-auth-client">Клиент</label>
+                </p>
             <p><input type="submit" name="submit" value="Войти"></p>
         </form>
 </div>
 
 <?php } else { ?>
     <h1>Добро пожаловать, <?= $_SESSION['login']; ?></h1>
-    <h2>Для загрузки аватара нажмите <a href="photo.php">сюда</a></h2>
+    <h2>Для загрузки фото нажмите <a href="photo.php">сюда</a></h2>
     <h2>Для выхода нажмите <a href="exit.php">сюда</a></h2>
 <?php } ?>
-
-<div class="gallery">
-
-    <ul>
-        <li>
-
-        </li>
-    </ul>
-</div>
 </body>
 </html>

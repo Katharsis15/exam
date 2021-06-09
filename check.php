@@ -37,25 +37,28 @@ if (isset($_POST['password'])) {
 }
 
 $status = htmlspecialchars(addslashes($_POST['status']));
+//var_dump($status);
 
-if(!empty($login)) {
+if(!empty($name) && !empty($surname) && !empty($phone) && !empty($login) && !empty($password)) {
     $result = mysqli_query($db, "SELECT * FROM `users` WHERE `login` = '$login' AND `status` = '$status'");
+    //var_dump($result);
 
-    if (mysqli_num_rows($result== 0)) {
-        $sql = mysqli_query($db, "INSERT INTO `users` (`name`, `surname`, `phone`, `login`, `password`, `status`) VALUES('$name', '$surname', '$phone', '$login', '$password', '$status')");
-        //die("INSERT INTO `users` (`name`, `surname`, `phone`, `login`, `password`, `status`) VALUES('$name', '$surname', '$phone', '$login', '$password', '$status')");
-        if(mysqli_error($db) === "") {
-            echo "Вы зарегистрированы!";
+    if (mysqli_num_rows($result) == 0) {
+        //var_dump($insert);
+        if(mysqli_error($db) == '') {
+            $insert = mysqli_query($db, "INSERT INTO `users` (`name`, `surname`, `phone`, `login`, `password`, `status`) VALUES('$name', '$surname', '$phone', '$login', '$password', '$status')");
+            echo 'Вы зарегистрированы!<br>';
+            echo 'Чтобы войти на сайт, нажмите' . ' ' . '<a href="index.php">сюда</a>';
         } else {
-            echo "Error";
+            echo 'Ошибка<br>';
+            echo 'Чтобы попробовать снова, нажмите' . ' ' . '<a href="index.php">сюда</a>';
         }
     }
     else {
-        echo "Пользователь с таким логином и статусом уже существует! ";
+        echo 'Пользователь с таким логином и статусом уже существует!<br>';
+        echo 'Чтобы попробовать снова, нажмите' . ' ' . '<a href="index.php">сюда</a>';
     }
 }
-
-    //header('Location: index.php');
 /*
 $sel = mysqli_query($db, "SELECT * FROM `users` WHERE `login` = '$login' AND `status` = '$status'");
 $num = mysqli_num_rows($sel);

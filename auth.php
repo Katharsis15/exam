@@ -20,20 +20,18 @@ $status = htmlspecialchars(addslashes($_POST['status']));
 
 if (!empty($login) && !empty($password)) { // проверяем, что логин и пароль заполнены
     // выполняем запрос на поиск пользователя в БД
-    $result = mysqli_query($db, "SELECT * FROM users WHERE login = '$login' AND status = '$status'");
+    $result = mysqli_query($db, "SELECT * FROM `users` WHERE `login` = '$login' AND `password` = '$password' AND `status` = '$status'");
 
     if (mysqli_num_rows($result) !== 0) { // если пользователь найден, то создаем сессию
         $user = mysqli_fetch_assoc($result); // получаем данные о пользователе из результата запроса
 
         $_SESSION['login'] = $login;
         $_SESSION['id'] = $user['id'];
-
-
-        // предлагаем успешно зарегистрированному пользователю загрузить свой аватар
-
+        echo 'Вход успешно выполнен.<br>';
+        echo 'Добро пожаловать, ' . $login;
 
     } else {
-        die('Неправильный логин или пароль');
+        echo "Такой пользователь не найден";
     }
 }
 /*$login = htmlspecialchars(addslashes($_POST['login']));
