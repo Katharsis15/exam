@@ -1,6 +1,9 @@
 <?php
 //session_start();
 require 'database.php';
+$title = 'Вход';
+include 'menu.php';
+
 
 if (isset($_POST['name'])) {
     $name = htmlspecialchars(addslashes($_POST['name']));
@@ -59,7 +62,11 @@ if(!empty($name) && !empty($surname) && !empty($phone) && !empty($login) && !emp
         echo 'Чтобы попробовать снова, нажмите' . ' ' . '<a href="index.php">сюда</a>';
     }
 }
-/*
+?>
+</body>
+</html>
+
+<!--
 $sel = mysqli_query($db, "SELECT * FROM `users` WHERE `login` = '$login' AND `status` = '$status'");
 $num = mysqli_num_rows($sel);
 
@@ -141,7 +148,5 @@ if ($result2 = TRUE)
 }
 else {
     echo "Ошибка! Вы не зарегистрированы.";
-}*/
-
-
-//header('Location: index.php');
+}
+//header('Location: index.php'); -->

@@ -1,6 +1,9 @@
 <?php
 session_start();
 require 'database.php';
+$title ='Авторизация';
+include 'menu.php';
+
 
 if (isset($_POST['login'])){
     $login = htmlspecialchars(addslashes($_POST['login']));
@@ -25,13 +28,19 @@ if (!empty($login) && !empty($password)) { // проверяем, что лог�
     if (mysqli_num_rows($result) !== 0) { // если пользователь найден, то создаем сессию
         $user = mysqli_fetch_assoc($result); // получаем данные о пользователе из результата запроса
 
+
         $_SESSION['login'] = $login;
+        $_SESSION['password'] = $password;
+        $_SESSION['status'] = $status;
         $_SESSION['id'] = $user['id'];
         echo 'Вход успешно выполнен.<br>';
         echo 'Добро пожаловать, ' . $login;
+        header('Location: index.php');
+
 
     } else {
-        echo "Такой пользователь не найден";
+        echo 'Такой пользователь не найден.<br>';
+        echo 'Чтобы попробовать снова, нажмите' . ' ' . '<a href="index.php">сюда</a>';
     }
 }
 /*$login = htmlspecialchars(addslashes($_POST['login']));
@@ -57,8 +66,7 @@ if($query)  {
 } else {
     echo "Такой пользователь не найден";
 }
-//header('Location: index.php');
 */
-
-
 ?>
+</body>
+</html>

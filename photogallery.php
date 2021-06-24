@@ -1,23 +1,22 @@
 <?php
 require 'database.php';
-
 $photo  = mysqli_query($db, "SELECT * FROM `files`");
+$title = 'Фотогалерея';
+include 'menu.php';
 
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Фотогалерея</title>
 </head>
 <style>
     img {
         width: 75%;
         height: auto;
+        margin: 10px;
     }
 </style>
 <body>
     <?php
+    echo 'Хотите, чтобы в фотогалерее появилась фотография, загруженная Вами?<br> <a href="photo.php" class="loadphoto">Ссылка на станицу загрузки фотографий</a>';
+
    while($result = mysqli_fetch_assoc($photo)){
        ?>
        <div class="img">

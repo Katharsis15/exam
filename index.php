@@ -1,12 +1,10 @@
 <?php
-//session_start();
+session_start();
 require 'database.php';
+$title = 'Регистрация и авторизация';
+include 'menu.php';
+
 ?>
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Регистрация и авторизация</title>
     <style>
 div {
     float: left;
@@ -17,7 +15,6 @@ h2 {
 }
     </style>
 </head>
-<body>
 
 <?php
 if (!isset($_SESSION['login'])) {
@@ -93,10 +90,11 @@ if (!isset($_SESSION['login'])) {
         </form>
 </div>
 
-<?php } else { ?>
-    <h1>Добро пожаловать, <?= $_SESSION['login']; ?></h1>
-    <h2>Для загрузки фото нажмите <a href="photo.php">сюда</a></h2>
-    <h2>Для выхода нажмите <a href="exit.php">сюда</a></h2>
-<?php } ?>
+<?php } else {
+    echo '<h3>Добро пожаловать,' .  ' ' . $_SESSION['login'] . '</h3>';
+    echo '<h4>Для загрузки фото в фотогалерею нажмите' . ' ' . '<a href="photo.php">сюда</a></h4>';
+    echo '<h4>Для того, чтобы сделать заказ, нажмите <a href="make_order.php">сюда</a></h4>';
+    echo '<h4>Для того, чтобы просмотреть свои заказы, нажмите <a href="orders.php">сюда</a></h4>';
+ } ?>
 </body>
 </html>
