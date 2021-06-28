@@ -4,7 +4,7 @@ require 'database.php';
 $title = 'Сделать заказ';
 include 'menu.php';
 
-if (isset($_SESSION)) { ?>
+if (isset($_SESSION['id'])) { ?>
     <h3>Запись на маникюр</h3>
 <form action="check_order.php" method="post">
     <p><b>Выберите тип маникюра:</b></p>
@@ -66,8 +66,23 @@ var_dump($num_rows);
                 echo '<p><input name="master_id" type="radio" value="' .  $master_id . '">' . $master_name . ' ' . $master_surname . '</p>';
                 --$num_rows;
             }*/
+   //в каком формате отправляется формой дата и время
+    date_default_timezone_set('Europe/Moscow');
+    echo date(" Y-m-d") . '<br>';
+    echo date("H:i") . ':00';
 
+    echo            '<p>
+                <label for="date"><b>Дата: </b></label>
+                <input type="date" id="date" name="date"/>
+            </p>';
+
+    echo '            <p>
+                <label for="time"><b>Время: </b></label>
+                <input type="time" id="time" name="time"/>
+            </p>';
     ?>
+
+    <p><b>После того, как Вы нажмёте "Отправить", Вы узнаете, свободна ли запись на выбранную дату и время к выбранному мастеру</b></p>
 
     <p><input type="submit" value="Отправить"></p>
 </form>
