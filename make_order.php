@@ -68,15 +68,32 @@ var_dump($num_rows);
             }*/
    //в каком формате отправляется формой дата и время
     date_default_timezone_set('Europe/Moscow');
-    echo date(" Y-m-d") . '<br>';
-    echo date("H:i") . ':00';
+    //echo date(" Y-m-d") . '<br>';
+    //echo date("H:i") . ':00';
+    echo '<p><b>Бронирование времени делается на 1 час, отсчитывая от выбранного Вами.</b></p>';
+    echo '<p><b>Запись возможна только на время вида XX:00! (запись невозможна на какое-либо количество минут после ":" кроме "00")</b></p>';
+    /*$today = date();
+    $now = date();
+    var_dump($today);
+    echo '<br>';
+    var_dump($now);
+    echo '<br>';*/
 
     echo            '<p>
                 <label for="date"><b>Дата: </b></label>
                 <input type="date" id="date" name="date"/>
             </p>';
 
-    echo '            <p>
+   /* if($result_time = mysqli_query($db, "SELECT * FROM `time` WHERE `master_id` = '$master_id'")){
+        foreach($result_time as $row_time){
+
+            $user_id = $row['id'];
+            $user_name = $row['name'];
+            $user_surname = $row['surname'];
+            echo '<p><input name="master_id" type="radio" value="' .  $user_id . '">' . $user_name . ' ' . $user_surname . '</p>';
+        }
+    }*/
+   echo '            <p>
                 <label for="time"><b>Время: </b></label>
                 <input type="time" id="time" name="time"/>
             </p>';
