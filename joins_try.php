@@ -24,12 +24,12 @@ $status = $_SESSION['status'];
 $id = $_SESSION['id'];
 
 if($status == 'master') {
-    $select1 = mysqli_query($db,"SELECT users.name, users.surname, orders.client_id, orders.date, orders.time, master_type_price.price, types.kind, types.covering FROM users INNER JOIN orders ON users.id = orders.client_id INNER JOIN master_type_price ON orders.master_type_price_id = master_type_price.id INNER JOIN types ON master_type_price.type_id = types.id");
+    $select1 = mysqli_query($db,"SELECT users.name, users.surname, orders.client_id, orders.date, orders.time, master_type_price.price, types.kind, types.covering FROM users INNER JOIN orders ON users.id = orders.client_id INNER JOIN master_type_price ON orders.master_type_price_id = master_type_price.id INNER JOIN types ON master_type_price.type_id = types.id WHERE master_type_price.master_id = '$id'");
     if ($select1) {
         $rowsCount = mysqli_num_rows($select1); // количество полученных строк
         echo '<p>Всего заказов: ' .  $rowsCount . '</p>';
         echo '<table><tr><th>id клиента</th><th>Дата</th><th>Время</th><th>Цена</th><th>Тип маникюра</th><th>Покрытие</th><th>Имя клиента</th><th>Фамилия клиента</th></tr>';
-        for ($i = 1; $i <= mysqli_num_rows(mysqli_query($db, "SELECT users.name, users.surname, orders.client_id, orders.date, orders.time, master_type_price.price, types.kind, types.covering FROM users INNER JOIN orders ON users.id = orders.client_id INNER JOIN master_type_price ON orders.master_type_price_id = master_type_price.id INNER JOIN types ON master_type_price.type_id = types.id")); $i++) {
+        for ($i = 1; $i <= mysqli_num_rows(mysqli_query($db, "SELECT users.name, users.surname, orders.client_id, orders.date, orders.time, master_type_price.price, types.kind, types.covering FROM users INNER JOIN orders ON users.id = orders.client_id INNER JOIN master_type_price ON orders.master_type_price_id = master_type_price.id INNER JOIN types ON master_type_price.type_id = types.id WHERE master_type_price.master_id = '$id'")); $i++) {
             $assoc_select = mysqli_fetch_assoc($select1);
             var_dump($assoc_select);
             echo '<tr>';
