@@ -36,6 +36,18 @@ require 'database.php';
         li {
             float:left;
         }
+        table {
+            border: 2px solid #556832;
+        }
+        tr {
+            border: 2px solid #556832;
+        }
+        td {
+            border: 2px solid #556832;
+        }
+        th {
+            border: 2px solid #556832;
+        }
     </style>
 </head>
 <body>

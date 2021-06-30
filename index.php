@@ -44,7 +44,7 @@ if (!isset($_SESSION['login'])) {
         </p>
         <p>
             Выберите Ваш статус:<br>
-            <input name="status" checked type="radio" value="master" id="status-reg-master">
+            <input name="status" type="radio" value="master" id="status-reg-master">
             <label for="status-reg-master">Мастер</label>
 
             <input name="status" type="radio" value="client" id="status-reg-client">
@@ -80,7 +80,7 @@ if (!isset($_SESSION['login'])) {
                     <option selected value="master">Мастер</option>
                 </select>-->
                 Выберите Ваш статус:<br>
-                <input name="status" checked type="radio" value="master" id="status-auth-master">
+                <input name="status" type="radio" value="master" id="status-auth-master">
                 <label for="status-auth-master">Мастер</label>
 
                 <input name="status" type="radio" value="client" id="status-auth-client">
@@ -91,9 +91,11 @@ if (!isset($_SESSION['login'])) {
 </div>
 
 <?php } else {
-    echo '<h3>Добро пожаловать,' .  ' ' . $_SESSION['login'] . '</h3>';
+    echo '<h3>Добро пожаловать,' . ' ' . $_SESSION['login'] . '</h3>';
     echo '<h4>Для загрузки фото в фотогалерею нажмите' . ' ' . '<a href="photo.php">сюда</a></h4>';
+    if ($_SESSION['status'] == 'client'){
     echo '<h4>Для того, чтобы сделать заказ, нажмите <a href="make_order.php">сюда</a></h4>';
+    }
     echo '<h4>Для того, чтобы просмотреть свои заказы, нажмите <a href="orders.php">сюда</a></h4>';
  } ?>
 </body>

@@ -3,61 +3,64 @@ session_start();
 require 'database.php';
 $title = 'Мои заказы';
 include 'menu.php';
-/*$orders = mysqli_query($db, "SELECT `master_type_price`.`type`,`price`, ``.`login` FROM `comments` INNER JOIN `users` ON t1.user_id = t2.id");
-for ($i = 0; $i <= mysqli_num_rows($orders); $i++) {
-    $result = mysqli_fetch_assoc($orders);
 
-    echo 'Комментарий: ' . $result['comment'] . '; Пользователь: ' . $result['login']; // выводим комментарий и его автора
-}*/
 $status = $_SESSION['status'];
+$id = $_SESSION['id'];
 
 if($status == 'master') {
-    if ($result = mysqli_query($db, "SELECT * FROM `orders`")) {
-
-        $rowsCount = mysqli_num_rows($result); // количество полученных строк
+    $select1 = mysqli_query($db,"SELECT users.name, users.surname,users.phone, orders.client_id, orders.date, orders.time, master_type_price.price, types.kind, types.covering FROM users INNER JOIN orders ON users.id = orders.client_id INNER JOIN master_type_price ON orders.master_type_price_id = master_type_price.id INNER JOIN types ON master_type_price.type_id = types.id WHERE master_type_price.master_id = '$id' ORDER BY orders.date");
+    if ($select1) {
+        $rowsCount = mysqli_num_rows($select1);
         echo '<p>Всего заказов: ' .  $rowsCount . '</p>';
-        echo '<table><tr><th>Имя клиента</th><th>Фамилия клиента</th><th>Тип маникюра</th><th>Покрытие</th><th>Цена</th><th>Дата</th><th>Время</th></tr>';
-        foreach ($result as $row) {
+        echo '<table><tr><th>Дата</th><th>Время</th><th>Цена</th><th>Тип маникюра</th><th>Покрытие</th><th>id клиента</th><th>Номер телефона клиента</th><th>Имя клиента</th><th>Фамилия клиента</th></tr>';
+        for ($i = 1; $i <= mysqli_num_rows(mysqli_query($db, "SELECT users.name, users.surname, orders.client_id, orders.date, orders.time, master_type_price.price, types.kind, types.covering FROM users INNER JOIN orders ON users.id = orders.client_id INNER JOIN master_type_price ON orders.master_type_price_id = master_type_price.id INNER JOIN types ON master_type_price.type_id = types.id WHERE master_type_price.master_id = '$id' ORDER BY orders.date")); $i++) {
+            $assoc_select = mysqli_fetch_assoc($select1);
             echo '<tr>';
-            echo '<td>' . $row['client_id'] . '</td>';
-            echo '<td>' . $row['client_id'] . '</td>';
-            echo '<td>' . $row['kind'] . '</td>';
-            echo '<td>' . $row['covering'] . '</td>';
-            echo '<td>' . $row['price'] . '</td>';
-            echo '<td>' . $row['date'] . '</td>';
-            echo '<td>' . $row['time'] . '</td>';
+            echo '<td>' . $assoc_select['date'] . '</td>';
+            echo '<td>' . $assoc_select['time'] . '</td>';
+            echo '<td>' . $assoc_select['price'] . '</td>';
+            echo '<td>' . $assoc_select['kind'] . '</td>';
+            echo '<td>' . $assoc_select['covering'] . '</td>';
+            echo '<td>' . $assoc_select['client_id'] . '</td>';
+            echo '<td>' . $assoc_select['phone'] . '</td>';
+            echo '<td>' . $assoc_select['name'] . '</td>';
+            echo '<td>' . $assoc_select['surname'] . '</td>';
             echo '</tr>';
         }
         echo '</table>';
+    } else {
+        echo 'Ошибка: ' . mysqli_error($db);
     }
 }
 
-if ($status == 'client') {
-    if ($result = mysqli_query($db, "SELECT * FROM `orders` WHERE `client_id` = '$'")) {
-
-        $rowsCount = mysqli_num_rows($result); // количество полученных строк
+if($status == 'client') {
+    $select1 = mysqli_query($db,"SELECT users.name, users.surname, users.phone, orders.date, orders.time, master_type_price.master_id, master_type_price.price, types.kind, types.covering FROM users INNER JOIN master_type_price ON users.id = master_type_price.master_id INNER JOIN orders ON orders.master_type_price_id = master_type_price.id INNER JOIN types ON master_type_price.type_id = types.id WHERE orders.client_id = '$id' ORDER BY orders.date");
+    if ($select1) {
+        $rowsCount = mysqli_num_rows($select1); // количество полученных строк
         echo '<p>Всего заказов: ' .  $rowsCount . '</p>';
-        echo '<table><tr><th>Имя мастера</th><th>Фамилия мастера</th><th>Тип маникюра</th><th>Покрытие</th><th>Цена</th><th>Дата</th><th>Время</th></tr>';
-        foreach ($result as $row) {
+        echo '<table><tr><th>Дата</th><th>Время</th><th>Цена</th><th>Тип маникюра</th><th>Покрытие</th><th>id мастера</th><th>Номер телефона мастера</th><th>Имя мастера</th><th>Фамилия мастера</th></tr>';
+        for ($i = 1; $i <= mysqli_num_rows(mysqli_query($db, "SELECT users.name, users.surname, users.phone, orders.date, orders.time, master_type_price.master_id, master_type_price.price, types.kind, types.covering FROM users INNER JOIN master_type_price ON users.id = master_type_price.master_id INNER JOIN orders ON orders.master_type_price_id = master_type_price.id INNER JOIN types ON master_type_price.type_id = types.id WHERE orders.client_id = '$id' ORDER BY orders.date")); $i++) {
+            $assoc_select = mysqli_fetch_assoc($select1);
             echo '<tr>';
-            echo '<td>' . $row['master_id'] . '</td>';
-            echo '<td>' . $row['master_id'] . '</td>';
-            echo '<td>' . $row['kind'] . '</td>';
-            echo '<td>' . $row['covering'] . '</td>';
-            echo '<td>' . $row['price'] . '</td>';
-            echo '<td>' . $row['date'] . '</td>';
-            echo '<td>' . $row['time'] . '</td>';
+            echo '<td>' . $assoc_select['date'] . '</td>';
+            echo '<td>' . $assoc_select['time'] . '</td>';
+            echo '<td>' . $assoc_select['price'] . '</td>';
+            echo '<td>' . $assoc_select['kind'] . '</td>';
+            echo '<td>' . $assoc_select['covering'] . '</td>';
+            echo '<td>' . $assoc_select['master_id'] . '</td>';
+            echo '<td>' . $assoc_select['phone'] . '</td>';
+            echo '<td>' . $assoc_select['name'] . '</td>';
+            echo '<td>' . $assoc_select['surname'] . '</td>';
             echo '</tr>';
         }
         echo '</table>';
+    } else {
+        echo 'Ошибка: ' . mysqli_error($db);
     }
 }
 if (!isset($_SESSION['status'])) {
     echo 'Чтобы просмотреть свои заказы, необходимо авторизоваться в разделе "Вход" на <a href="index.php">главной странице</a>';
 }
-/*    } else {
-        echo 'Ошибка: ' . mysqli_error($db);
-    }*/
 ?>
 </body>
 </html>
