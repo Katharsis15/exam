@@ -16,7 +16,7 @@ if($status == 'master') {
 
         $rowsCount = mysqli_num_rows($result); // количество полученных строк
         echo '<p>Всего заказов: ' .  $rowsCount . '</p>';
-        echo '<table border="1 px"><tr><th>Имя клиента</th><th>Фамилия клиента</th><th>Тип маникюра</th><th>Покрытие</th><th>Цена</th><th>Дата</th><th>Время</th></tr>';
+        echo '<table><tr><th>Имя клиента</th><th>Фамилия клиента</th><th>Тип маникюра</th><th>Покрытие</th><th>Цена</th><th>Дата</th><th>Время</th></tr>';
         foreach ($result as $row) {
             echo '<tr>';
             echo '<td>' . $row['client_id'] . '</td>';
@@ -37,7 +37,7 @@ if ($status == 'client') {
 
         $rowsCount = mysqli_num_rows($result); // количество полученных строк
         echo '<p>Всего заказов: ' .  $rowsCount . '</p>';
-        echo '<table border="1 px"><tr><th>Имя мастера</th><th>Фамилия мастера</th><th>Тип маникюра</th><th>Покрытие</th><th>Цена</th><th>Дата</th><th>Время</th></tr>';
+        echo '<table><tr><th>Имя мастера</th><th>Фамилия мастера</th><th>Тип маникюра</th><th>Покрытие</th><th>Цена</th><th>Дата</th><th>Время</th></tr>';
         foreach ($result as $row) {
             echo '<tr>';
             echo '<td>' . $row['master_id'] . '</td>';
